@@ -24,10 +24,6 @@ function checkPattern(index){
                 },800);            
         }
 
-        else if(user_pattern.length < pattern.length)
-        {
-            performClicks();
-        }
     }
 
     else 
@@ -49,26 +45,19 @@ function checkPattern(index){
         }
 }
 
+    $(".btn").click(function(){
+        var btnId = $(this) ;
+        user_pattern.push(btnId.attr("id")) ;
+        btnId[0].classList.add('pressed');
 
-function performClicks(){
+        setTimeout(function(){
+            btnId[0].classList.remove("pressed");
+        },100);
+    
+        checkPattern(user_pattern.length -1) ;
+    
+    }) ;
 
-    for (let i=0; i < btns.length; i++){
-        btns[i].addEventListener('click',function(){
-
-            let clicked = $(this);
-
-            user_pattern.push(clicked.attr("id"));
-            clicked[0].classList.add('pressed');
-
-            setTimeout(function(){
-                clicked[0].classList.remove("pressed");
-            },100);
-
-            checkPattern(user_pattern.length - 1);                        
-
-        });
-    }
-}
 
 function continueGame(){
 
@@ -85,10 +74,7 @@ function continueGame(){
     
     setTimeout(function(){
         btns[num].classList.remove("pressed");
-    },100);
-
-    performClicks();
-    
+    },100);    
   
 }
    
